@@ -3,7 +3,7 @@ import pandas as pd
 
 @st.cache_data
 def read_kalender():
-    df = pd.read_csv("./tenniskalender.csv")
+    df = pd.read_csv("tenniskalender.csv")
     return df.iloc[:, [1, 2, 3, 4, 5, 6, 7]]
 
 dfall = read_kalender()
@@ -46,18 +46,23 @@ col1, col2 = st.columns([1,1])
 col1.write(":tennis: Tenniskalender :tennis:")
 
 config = {
-    'termin' : st.column_config.TextColumn('Termin', width='small', required=True),
-    'Simone' : st.column_config.CheckboxColumn('S', width='small', required=True),
+    'termin' : st.column_config.TextColumn('Termin'),
+    'Micha' : st.column_config.CheckboxColumn('Mi'),
+    'Ute' : st.column_config.CheckboxColumn('U' ),
+    'Birgit' : st.column_config.CheckboxColumn('B'),
+    'Margret' : st.column_config.CheckboxColumn('Ma'),
+    'Heidi' : st.column_config.CheckboxColumn('H'),
+    'Simone' : st.column_config.CheckboxColumn('Simone'),
 }
 
 edited_df = st.data_editor(dfall, 
                            height = 600,
                            use_container_width = False, 
                            hide_index = True,
-                           disabled=["termin"],
-                           column_config=config)
+                           disabled=["termin", "Simone", "Micha", "Ute", "Birgit", "Margret", "Heidi"],
+                           )             # column_config=config
 if col2.button("Speichern"):
-    edited_df.to_csv("./tenniskalender.csv")
+    edited_df.to_csv("tenniskalender.csv")
 
 st.dataframe(dfall, hide_index=True )
 # favorite_Termin = 12.11.24[edited_df["rating"].idxmax()]["Termin"]
