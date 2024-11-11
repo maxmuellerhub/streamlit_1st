@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
 
-st.write("Tennisplaner")
-
 @st.cache_data
 def read_kalender():
     df = pd.read_csv("./tenniskalender.csv")
@@ -44,13 +42,21 @@ def ini_kalender():
     dfall = dfall.join(pd.DataFrame(spieler5).set_index('termin') )
     return dfall
 
-tab1, tab2 = st.tabs(["", ""])
-tab1.write("Tenniskalender")
-# tab2.write("this is tab 2")
+col1, col2 = st.columns([1,1])
+col1.write(":tennis: Tenniskalender :tennis:")
 
-edited_df = st.data_editor(dfall, use_container_width = True, 
-                           hide_index = True,)
-if tab2.button("Speichern"):
+config = {
+    'termin' : st.column_config.TextColumn('Termin', width='small', required=True),
+    'Simone' : st.column_config.CheckboxColumn(width='small', required=True),
+}
+
+edited_df = st.data_editor(dfall, 
+                           width = 600, height = 600,
+                           use_container_width = False, 
+                           hide_index = True,
+                           disabled=["termin"],
+                           column_config=config)
+if col2.button("Speichern"):
     edited_df.to_csv("./tenniskalender.csv")
 
 
