@@ -7,6 +7,17 @@ st.set_page_config(
     layout="wide",
 )
 
+i=0
+if False:
+    with st.form(key=f"test{i}", clear_on_submit=True):
+        username = st.text_input('Username')
+        password = st.text_input('Password')
+        st.form_submit_button('Login')    
+        i=i+1
+# if username.lower in ["margret", "heidi"]:
+#     pass
+
+
 # @st.cache_data
 def read_kalender():
     df = pd.read_csv("tenniskalender.csv")
@@ -75,10 +86,7 @@ if col2.button("Speichern"):
         edited_df.to_csv("tenniskalender.csv")    
         st.success("Termine gespeichert")
 
-if os.path.exists("tenniskalender.csv"):
-    st.write("Pfad exisitert")
-    last_mod = os.path.getmtime("tenniskalender.csv")
-    st.write(f"letzte Modifikation: {last_mod:.0f} s")
 
-# st.dataframe(dfall, hide_index=True )
-# favorite_Termin = 12.11.24[edited_df["rating"].idxmax()]["Termin"]
+# if os.path.exists("tenniskalender.csv"):
+#     last_mod = os.path.getmtime("tenniskalender.csv")
+#     st.write(f"letzte Modifikation: {last_mod:.0f} s")
