@@ -90,7 +90,7 @@ if 'username' not in st.session_state:
 
 if  not st.session_state.logged_in:
     with st.form(key="login", clear_on_submit=False):
-        username = st.text_input('Benutzer, bitte 2 x Submit drücken', key = 'username')
+        username = st.text_input('Bitte Name eintragen und 2 x Submit drücken.', key = 'username')
         # password = st.text_input('Password')
         if st.form_submit_button('Submit') and username.lower().strip() in spieler:
             st.session_state.logged_in=True
