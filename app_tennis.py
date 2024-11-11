@@ -83,13 +83,16 @@ def main_app():
 
 if 'logged_in' not in st.session_state: 
     st.session_state.logged_in = False
-# "akt. Session State: ", st.session_state
+if 'username' not in st.session_state: 
+    st.session_state.username = "Unbekannt"
+
+"akt. Session State: ", st.session_state
 
 if  not st.session_state.logged_in:
     with st.form(key="login", clear_on_submit=False):
-        username = st.text_input('Username')
+        username = st.text_input('Username', key = 'username')
         # password = st.text_input('Password')
-        if st.form_submit_button('Login') and username.lower().strip() in spieler:
+        if st.form_submit_button('') and username.lower().strip() in spieler:
             st.session_state.logged_in=True
 else:
     main_app()
