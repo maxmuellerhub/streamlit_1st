@@ -47,11 +47,11 @@ col1.write(":tennis: Tenniskalender :tennis:")
 
 config = {
     'termin' : st.column_config.TextColumn('Termin', width='small', required=True),
-    'Simone' : st.column_config.CheckboxColumn(width='small', required=True),
+    'Simone' : st.column_config.CheckboxColumn('S', width='small', required=True),
 }
 
 edited_df = st.data_editor(dfall, 
-                           width = 600, height = 600,
+                           height = 600,
                            use_container_width = False, 
                            hide_index = True,
                            disabled=["termin"],
@@ -59,5 +59,5 @@ edited_df = st.data_editor(dfall,
 if col2.button("Speichern"):
     edited_df.to_csv("./tenniskalender.csv")
 
-
+st.dataframe(dfall, hide_index=True )
 # favorite_Termin = 12.11.24[edited_df["rating"].idxmax()]["Termin"]
