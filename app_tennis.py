@@ -7,7 +7,7 @@ st.set_page_config(
     layout="wide",
 )
 
-@st.cache_data
+# @st.cache_data
 def read_kalender():
     df = pd.read_csv("tenniskalender.csv")
     return df.iloc[:, [1, 2, 3, 4, 5, 6, 7]]
@@ -79,6 +79,7 @@ if os.path.exists("tenniskalender.csv"):
     st.write("Pfad exisitert")
     last_mod = os.path.getmtime("tenniskalender.csv")
     st.write(f"letzte Modifikation: {last_mod:.0f} s")
+    read_data=
 
 # st.dataframe(dfall, hide_index=True )
 # favorite_Termin = 12.11.24[edited_df["rating"].idxmax()]["Termin"]
