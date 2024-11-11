@@ -86,7 +86,7 @@ if 'logged_in' not in st.session_state:
 if 'username' not in st.session_state: 
     st.session_state.username = "Unbekannt"
 
-"akt. Session State: ", st.session_state
+# "akt. Session State: ", st.session_state
 
 if  not st.session_state.logged_in:
     with st.form(key="login", clear_on_submit=False):
