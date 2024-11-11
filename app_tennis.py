@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from datei_io import read_text_file
 
 st.write("Tennisplaner")
 
