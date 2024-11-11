@@ -44,8 +44,13 @@ def ini_kalender():
     dfall = dfall.join(pd.DataFrame(spieler5).set_index('termin') )
     return dfall
 
-edited_df = st.data_editor(dfall, use_container_width = True, hide_index = True)
-if st.button("Speichern"):
+tab1, tab2 = st.tabs(["", ""])
+tab1.write("Tenniskalender")
+# tab2.write("this is tab 2")
+
+edited_df = st.data_editor(dfall, use_container_width = True, 
+                           hide_index = True,)
+if tab2.button("Speichern"):
     edited_df.to_csv("./tenniskalender.csv")
 
 
