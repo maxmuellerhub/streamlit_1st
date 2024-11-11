@@ -89,8 +89,7 @@ if  not st.session_state.logged_in:
     with st.form(key="login", clear_on_submit=False):
         username = st.text_input('Username')
         # password = st.text_input('Password')
-        submitted = st.form_submit_button('Login')
-        if submitted and username.lower().strip() in spieler:
+        if st.form_submit_button('Login') and username.lower().strip() in spieler:
             st.session_state.logged_in=True
 else:
     main_app()
