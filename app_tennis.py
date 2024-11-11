@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os
+import time
 
 st.set_page_config(
     page_title="Tenniskalender",
@@ -76,7 +77,9 @@ def main_app():
                             )             # column_config=config
     if col2.button("Speichern"):
         with st.spinner(text = "Speichere die Daten"):
-            edited_df.to_csv("tenniskalender.csv")    
+            edited_df.to_csv("tenniskalender.csv")
+            timestr = time.strftime("_%Y%m%d-%H%M%S")  
+            edited_df.to_csv("tenniskalender"+timestr+".csv")
             st.success("Termine gespeichert")
     # /end main_app()
 
