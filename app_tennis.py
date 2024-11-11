@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import os
 
 st.set_page_config(
     page_title="Tenniskalender",
@@ -47,7 +48,7 @@ def ini_kalender():
     dfall = dfall.join(pd.DataFrame(spieler5).set_index('termin') )
     return dfall
 
-"akt. Session State: ", st.session_state
+# "akt. Session State: ", st.session_state
 
 col1, col2 = st.columns([1,1])
 col1.write(":tennis: Tenniskalender :tennis:")
@@ -73,6 +74,11 @@ if col2.button("Speichern"):
     with st.spinner(text = "Speichere die Daten"):
         edited_df.to_csv("tenniskalender.csv")    
         st.success("Termine gespeichert")
+
+if os.path.exists("tenniskalender.csv"):
+    st.write("Pfad exisitert")
+    last_mod = os.path.getmtime("tenniskalender.csv")
+    st.write(f"letzte Modifikation: {last_mod:.0f} s")
 
 # st.dataframe(dfall, hide_index=True )
 # favorite_Termin = 12.11.24[edited_df["rating"].idxmax()]["Termin"]
