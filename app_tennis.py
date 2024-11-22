@@ -8,6 +8,19 @@ st.set_page_config(
     layout="wide",
 )
 
+# st.title(":tennis: Tenniskalender :tennis:")
+
+####  Functions  ####
+def store_value(source, destination):
+    st.session.state[destination] = st.session.state[source]
+
+####  Variablen   ###
+if 'logged_in' not in st.session_state: 
+    st.session_state.logged_in = False
+if 'username' not in st.session_state: 
+    st.session_state.username = "Unbekannt"
+
+
 spieler = ["simone", "micha", "ute", "birgit", "margret", "heidi", ]
 
 
@@ -56,7 +69,7 @@ def main_app():
     # "akt. Session State: ", st.session_state
 
     col1, col2 = st.columns([1,1])
-    col1.write(":tennis: Tenniskalender :tennis:")
+    col1.write(f":tennis: Tenniskalender :tennis:    für {st.session_state.username}")
 
     config = {
         'termin' : st.column_config.TextColumn('Termin'),
@@ -79,23 +92,22 @@ def main_app():
         with st.spinner(text = "Speichere die Daten"):
             edited_df.to_csv("tenniskalender.csv")
             timestr = time.strftime("_%Y%m%d-%H%M%S")  
-            edited_df.to_csv("tenniskalender"+timestr+".csv")
+            user = st.session_state.username
+            edited_df.to_csv("tenniskalender_"+user+timestr+".csv")
             st.success("Termine gespeichert")
     # /end main_app()
 
 
-if 'logged_in' not in st.session_state: 
-    st.session_state.logged_in = False
-if 'username' not in st.session_state: 
-    st.session_state.username = "Unbekannt"
+
 
 # "akt. Session State: ", st.session_state
 
 if  not st.session_state.logged_in:
     with st.form(key="login", clear_on_submit=False):
-        username = st.text_input('Bitte Name eintragen und 2 x Submit drücken.', key = 'username')
+        username = st.text_input('Bitte Name eintragen und 2 x Submit drücken.')
         # password = st.text_input('Password')
         if st.form_submit_button('Submit') and username.lower().strip() in spieler:
             st.session_state.logged_in=True
+            st.session_state.username=username
 else:
     main_app()
