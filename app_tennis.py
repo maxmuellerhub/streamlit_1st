@@ -4,7 +4,7 @@ import os
 import time
 
 st.set_page_config(
-    page_title="Tenniskalender",
+    page_title="Tenniskalender v1.1",
     layout="wide",
 )
 
