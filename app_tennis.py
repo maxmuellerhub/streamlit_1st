@@ -95,9 +95,14 @@ def main_app():
             user = st.session_state.username
             edited_df.to_csv("tenniskalender_"+user+timestr+".csv")
             st.success("Termine gespeichert")
+
+    if st.session_state.username=="margret":
+        st.write('Hallo Margret!')
+        st.write('gespeicherte Tabellen:')
+        filenames = [f for f in os.listdir('.') if f.endswith('.csv')]
+        st.write(filenames)
+
     # /end main_app()
-
-
 
 
 # "akt. Session State: ", st.session_state
@@ -108,6 +113,6 @@ if  not st.session_state.logged_in:
         # password = st.text_input('Password')
         if st.form_submit_button('Submit') and username.lower().strip() in spieler:
             st.session_state.logged_in=True
-            st.session_state.username=username
+            st.session_state.username=username.lower().strip()
 else:
     main_app()
