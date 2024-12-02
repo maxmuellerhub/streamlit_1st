@@ -100,7 +100,7 @@ def main_app():
         st.write('Hallo Margret!')
         st.write('gespeicherte Tabellen:')
         filenames = [f for f in os.listdir('.') if f.endswith('.csv')]
-        st.write(filenames)
+        st.write(filenames) 
 
     # /end main_app()
 
