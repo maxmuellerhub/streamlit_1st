@@ -3,8 +3,15 @@ import pandas as pd
 import os
 import time
 
+import utils.ftp_aw
+
+ftp_server = 'ftp.strato.de'
+username = 'sftp_witzmanns@witzmanns.de'
+password = 'tenniSFtp246!'
+directory = '/'
+
 st.set_page_config(
-    page_title="Tenniskalender v1.1",
+    page_title="Tenniskalender",
     layout="wide",
 )
 
@@ -93,11 +100,12 @@ def main_app():
             edited_df.to_csv("tenniskalender.csv")
             timestr = time.strftime("_%Y%m%d-%H%M%S")  
             user = st.session_state.username
-            edited_df.to_csv("tenniskalender_"+user+timestr+".csv")
+            filename = "tenniskalender_"+user+timestr+".csv"
+            edited_df.to_csv(filename)
+            upload_file(ftp_server, username, password, filename, 'tenniskalender.csv', directory='/')
             st.success("Termine gespeichert")
 
     if st.session_state.username=="margret":
-        st.write('Hallo Margret!')
         st.write('gespeicherte Tabellen:')
         filenames = [f for f in os.listdir('.') if f.endswith('.csv')]
         st.write(filenames) 
