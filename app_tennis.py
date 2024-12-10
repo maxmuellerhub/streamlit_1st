@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import time
 
-import utils.ftp_aw
+import utils.ftp_aw as aw
 
 ftp_server = 'ftp.strato.de'
 username = 'sftp_witzmanns@witzmanns.de'
@@ -102,7 +102,7 @@ def main_app():
             user = st.session_state.username
             filename = "tenniskalender_"+user+timestr+".csv"
             edited_df.to_csv(filename)
-            upload_file(ftp_server, username, password, filename, 'tenniskalender.csv', directory='/')
+            aw.upload_file(ftp_server, username, password, filename, directory='/')
             st.success("Termine gespeichert")
 
     if st.session_state.username=="margret":
