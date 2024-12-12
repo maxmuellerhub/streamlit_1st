@@ -5,9 +5,9 @@ import time
 
 import utils.ftp_aw as aw
 
-ftp_server = 'ftp.strato.de'
-username = 'sftp_witzmanns@witzmanns.de'
-password = 'tenniSFtp246!'
+ftp_server = st.secrets["STOR_URL"]
+username = st.secrets["STOR_USERNAME"]
+password = st.secrets["STOR_PW"]
 directory = '/'
 
 st.set_page_config(
