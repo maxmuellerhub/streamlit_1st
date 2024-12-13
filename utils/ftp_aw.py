@@ -14,8 +14,7 @@ def get_last_file(ftp_server, username, password, directory='/')  ->str :
     files.sort(key=lambda item: item[1]["modify"], reverse=True)           # "modifiy" immer in UTC
     files = list(filter(lambda f: f[0].endswith(".csv"), files))
     last_file = files[0][0]
-    # Download the latest file
-    if last_file:
+    if last_file:                                                                                                                                                                    
         with open(last_file, 'wb') as f:
             ftp.retrbinary('RETR ' + last_file, f.write)
         print(f'Downloaded {last_file}')
