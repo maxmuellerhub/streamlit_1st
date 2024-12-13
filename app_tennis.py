@@ -2,8 +2,7 @@ import streamlit as st
 import pandas as pd
 import os
 import time
-
-import utils.ftp_aw as aw
+import utils.ftp_aw as aw_ftp
 
 ftp_server = st.secrets["STOR_URL"]
 username = st.secrets["STOR_USERNAME"]
@@ -26,14 +25,23 @@ if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 if 'username' not in st.session_state: 
     st.session_state.username = "Unbekannt"
-
+if 'file_from_server' not in st.session_state: 
+    st.session_state.file_from_server = ""          # letzter Stand von ftp, der am Anfang der Session geladen wird
 
 spieler = ["simone", "micha", "ute", "birgit", "margret", "heidi", ]
 
-
 def main_app():
-    # @st.cache_data
+
     def read_kalender():
+        if st.session_state.file_from_server=="":         # bei Session Start: lokalen "tenniscalender.csv" mit letztem von Server aktualisieren
+            print("Trying to get Server Data")
+            last_file = aw_ftp.get_last_file(ftp_server, username, password, directory)
+            if last_file.endswith(".csv") :
+                print(last_file)
+                st.session_state.file_from_server=last_file
+                timestr=time.strftime("_%Y%m%d-%H%M%S")     
+                os.rename("tenniskalender.csv", "tenniskalender"+timestr+".csv")
+                os.rename(last_file, "tenniskalender.csv")
         df = pd.read_csv("tenniskalender.csv")
         return df.iloc[:, [1, 2, 3, 4, 5, 6, 7]]
 
@@ -98,14 +106,15 @@ def main_app():
     if col2.button("Speichern"):
         with st.spinner(text = "Speichere die Daten"):
             edited_df.to_csv("tenniskalender.csv")
-            timestr = time.strftime("_%Y%m%d-%H%M%S")  
+            timestr = time.strftime("_%Y%m%d-%H%M%S")                   # ohne Angabe Zeitzone wird wohl Server-Zeitzone verwendet
             user = st.session_state.username
             filename = "tenniskalender_"+user+timestr+".csv"
             edited_df.to_csv(filename)
-            aw.upload_file(ftp_server, username, password, filename, directory='/')
+            aw_ftp.upload_file(ftp_server, username, password, filename, directory='/')
             st.success("Termine gespeichert")
 
     if st.session_state.username=="margret":
+        st.write(f"letztes File vom Server: {st.session_state.file_from_server}")
         st.write('gespeicherte Tabellen:')
         filenames = [f for f in os.listdir('.') if f.endswith('.csv')]
         st.write(filenames) 
@@ -114,6 +123,8 @@ def main_app():
 
 
 # "akt. Session State: ", st.session_state
+
+
 
 if  not st.session_state.logged_in:
     with st.form(key="login", clear_on_submit=False):
