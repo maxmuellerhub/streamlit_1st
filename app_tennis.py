@@ -14,7 +14,7 @@ st.set_page_config(
     layout="centered",
 )
 
-# st.title(":tennis: Tenniskalender :tennis:")
+# st.title(":tennis: Spielplan Da LL2 :tennis:")
 
 ####  Functions  ####
 def store_value(source, destination):
@@ -84,8 +84,8 @@ def main_app():
     # "akt. Session State: ", st.session_state
 
     col1, col2 = st.columns([3,1])
-
-    col1.write(f"<p style='font-size:24px; color:yellow'>🎾 Spielplan Da LL2 🎾      für {st.session_state.username}</p>", unsafe_allow_html=True)
+    
+    col1.write(f"<p style='font-size:24px; color:blue; font-weight:bold;'>     🎾 Spielplan Damen LL2 🎾</p>", unsafe_allow_html=True)  # für {st.session_state.username}
 
     config = {
         'termin' : st.column_config.TextColumn('Termin'),
@@ -96,13 +96,32 @@ def main_app():
         'Heidi' : st.column_config.CheckboxColumn('H'),
         'Simone' : st.column_config.CheckboxColumn('Simone'),
     }
+    config = {
+        'termin' : st.column_config.TextColumn('Termin'),
+        'Micha' : st.column_config.CheckboxColumn('Mi'),
+    }
 
-    edited_df = st.data_editor(dfall, 
-                            height = 600,
+    st.markdown("""
+        <style>
+        table {background-color: #f0f0f0;}
+        </style>
+        """, unsafe_allow_html=True)
+    
+    def highlight_inout(s):
+        return ['background-color: skyblue']*len(s) if str(s.termin).endswith("H") else ['background-color: #FFFFE0']*len(s)
+            # dfall.style.apply(highlight_inout, axis=1),  
+    def color_termin(val):
+        color = 'skyblue' if str(val).endswith("H") else '#FFFFE0'
+        return f'background-color: {color}'
+            # dfall.style.applymap(color_termin, subset=['termin']),   
+
+    edited_df = st.data_editor(dfall.style.applymap(color_termin, subset=['termin']), 
+                            height = 400,
                             use_container_width = False, 
                             hide_index = True,
                             disabled=["termin"],    # ["termin", "Simone", "Micha", "Ute", "Birgit", "Margret", "Heidi"],
                             key="datatable", 
+                            column_config=config,
                             )             # column_config=config
     
     if col2.button("Speichern"):
