@@ -11,7 +11,7 @@ directory = '/'
 
 st.set_page_config(
     page_title="Tenniskalender",
-    layout="wide",
+    layout="centered",
 )
 
 # st.title(":tennis: Tenniskalender :tennis:")
@@ -33,7 +33,7 @@ spieler = ["simone", "micha", "ute", "birgit", "margret", "heidi", ]
 def main_app():
 
     def read_kalender():
-        if st.session_state.file_from_server=="" and False:         # bei Session Start: lokalen "tenniscalender.csv" mit letztem von Server aktualisieren
+        if st.session_state.file_from_server=="" and True:         # bei Session Start: lokalen "tenniscalender.csv" mit letztem von Server aktualisieren
             print("Trying to get Server Data")
             last_file = aw_ftp.get_last_file(ftp_server, username, password, directory)
             if last_file.endswith(".csv") :
@@ -83,8 +83,9 @@ def main_app():
 
     # "akt. Session State: ", st.session_state
 
-    col1, col2 = st.columns([1,1])
-    col1.write(f":tennis: Spielplan Da LL2 :tennis:    für {st.session_state.username}")
+    col1, col2 = st.columns([3,1])
+
+    col1.write(f"<p style='font-size:24px; color:yellow'>🎾 Spielplan Da LL2 🎾      für {st.session_state.username}</p>", unsafe_allow_html=True)
 
     config = {
         'termin' : st.column_config.TextColumn('Termin'),
@@ -103,6 +104,7 @@ def main_app():
                             disabled=["termin"],    # ["termin", "Simone", "Micha", "Ute", "Birgit", "Margret", "Heidi"],
                             key="datatable", 
                             )             # column_config=config
+    
     if col2.button("Speichern"):
         with st.spinner(text = "Speichere die Daten"):
             edited_df.to_csv("tenniskalender.csv")
