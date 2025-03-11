@@ -33,7 +33,7 @@ spieler = ["simone", "micha", "ute", "birgit", "margret", "heidi", ]
 def main_app():
 
     def read_kalender():
-        if st.session_state.file_from_server=="":         # bei Session Start: lokalen "tenniscalender.csv" mit letztem von Server aktualisieren
+        if st.session_state.file_from_server=="" and False:         # bei Session Start: lokalen "tenniscalender.csv" mit letztem von Server aktualisieren
             print("Trying to get Server Data")
             last_file = aw_ftp.get_last_file(ftp_server, username, password, directory)
             if last_file.endswith(".csv") :
@@ -84,7 +84,7 @@ def main_app():
     # "akt. Session State: ", st.session_state
 
     col1, col2 = st.columns([1,1])
-    col1.write(f":tennis: Tenniskalender :tennis:    für {st.session_state.username}")
+    col1.write(f":tennis: Spielplan Da LL2 :tennis:    für {st.session_state.username}")
 
     config = {
         'termin' : st.column_config.TextColumn('Termin'),

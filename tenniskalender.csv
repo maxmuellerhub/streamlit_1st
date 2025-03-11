@@ -1,29 +1,8 @@
-,termin,Simone,Micha,Ute,Birgit,Margret,Heidi
-0,01.10.24,True,True,False,True,True,False
-1,08.10.24,False,True,False,True,True,True
-2,15.10.24,False,True,True,False,True,True
-3,22.10.24,True,True,True,False,False,True
-4,29.10.24,True,False,True,False,True,True
-5,05.11.24,False,True,False,True,True,True
-6,12.11.24,True,True,True,True,False,False
-7,19.11.24,False,True,False,False,True,True
-8,26.11.24,False,True,True,True,False,False
-9,03.12.24,True,False,True,False,True,True
-10,10.12.24,True,True,False,True,False,True
-11,17.12.24,False,True,True,True,True,False
-12,07.01.25,False,True,True,False,True,True
-13,14.01.25,False,False,False,True,False,False
-14,21.01.25,False,False,False,True,False,False
-15,28.01.25,False,False,False,True,False,False
-16,04.02.25,False,False,False,True,False,False
-17,11.02.25,False,False,False,False,False,False
-18,18.02.25,False,False,False,False,False,False
-19,25.02.25,False,False,False,True,False,False
-20,04.03.25,False,False,False,True,False,False
-21,11.03.25,False,False,False,True,False,False
-22,18.03.25,False,False,False,True,False,False
-23,25.03.25,False,False,False,False,False,False
-24,01.04.25,False,False,False,True,False,False
-25,08.04.25,False,False,False,False,False,False
-26,15.04.25,False,False,False,False,False,False
-27,22.04.25,False,False,False,False,False,False
+,termin,Simone,Heidi,Micha,Margret,Ute,Birgit
+0,Sa 03.05.25 A,False,False,False,False,False,False
+1,Sa 10.05.25 H,False,False,False,False,False,False
+2,Sa 17.05.25 H,False,False,False,False,False,False
+3,So 25.05.25 H,False,False,False,False,False,False
+4,Sa 31.05.25 A,False,False,False,False,False,False
+5,Sa 05.07.25 H,False,False,False,False,False,False
+6,Sa 12.07.25 A,False,False,False,False,False,False
