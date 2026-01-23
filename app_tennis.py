@@ -12,6 +12,7 @@ directory = '/'
 st.set_page_config(
     page_title="Tenniskalender",
     layout="centered",
+    theme="light",
 )
 
 # st.title(":tennis: Spielplan Da LL2 :tennis:")
