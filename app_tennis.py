@@ -87,6 +87,7 @@ def main_app():
     
     col1.write(f"<p style='font-size:24px; color:blue; font-weight:bold;'>     🎾 Spielplan Damen LL2 🎾</p>", unsafe_allow_html=True)  # für {st.session_state.username}
 
+    '''
     config = {
         'termin' : st.column_config.TextColumn('Termin'),
         'Micha' : st.column_config.CheckboxColumn('Mi'),
@@ -100,6 +101,7 @@ def main_app():
         'termin' : st.column_config.TextColumn('Termin'),
         'Micha' : st.column_config.CheckboxColumn('Mi'),
     }
+    '''
 
     # Custom CSS to inject  ???
     st.markdown('''
