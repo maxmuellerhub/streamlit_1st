@@ -101,11 +101,17 @@ def main_app():
         'Micha' : st.column_config.CheckboxColumn('Mi'),
     }
 
-    st.markdown("""
+    # Custom CSS to inject  ???
+    st.markdown('''
         <style>
-        table {background-color: #f0f0f0;}
+        dataframe th {
+            background-color: #f0ad4e;
+        }
+        dataframe td:first-child {
+            background-color: #5bc0de;
+        }
         </style>
-        """, unsafe_allow_html=True)
+        ''', unsafe_allow_html=True)
     
     def highlight_inout(s):
         return ['background-color: skyblue']*len(s) if str(s.termin).endswith("H") else ['background-color: #FFFFE0']*len(s)
@@ -114,8 +120,10 @@ def main_app():
         color = 'skyblue' if str(val).endswith("H") else '#FFFFE0'
         return f'background-color: {color}'
             # dfall.style.applymap(color_termin, subset=['termin']),   
+    # st.dataframe(dfall.style.applymap(lambda x: 'background-color : yellow' if x>0 else ''))
+    # for color gradient, you can replace “background-color:green” with “background-image: linear-gradient(to right, yellow , green);”
 
-    edited_df = st.data_editor(dfall.style.applymap(color_termin, subset=['termin']), 
+    edited_df = st.data_editor(dfall.style.map(color_termin, subset=['termin']), 
                             height = 400,
                             use_container_width = False, 
                             hide_index = True,
