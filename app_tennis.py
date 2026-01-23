@@ -87,21 +87,6 @@ def main_app():
     
     col1.write(f"<p style='font-size:24px; color:blue; font-weight:bold;'>     🎾 Spielplan Damen LL2 🎾</p>", unsafe_allow_html=True)  # für {st.session_state.username}
 
-    '''
-    config = {
-        'termin' : st.column_config.TextColumn('Termin'),
-        'Micha' : st.column_config.CheckboxColumn('Mi'),
-        'Ute' : st.column_config.CheckboxColumn('U' ),
-        'Birgit' : st.column_config.CheckboxColumn('B'),
-        'Margret' : st.column_config.CheckboxColumn('Ma'),
-        'Heidi' : st.column_config.CheckboxColumn('H'),
-        'Simone' : st.column_config.CheckboxColumn('Simone'),
-    }
-    config = {
-        'termin' : st.column_config.TextColumn('Termin'),
-        'Micha' : st.column_config.CheckboxColumn('Mi'),
-    }
-    '''
 
     # Custom CSS to inject  ???
     st.markdown('''
@@ -127,7 +112,7 @@ def main_app():
 
     edited_df = st.data_editor(dfall.style.map(color_termin, subset=['termin']), 
                             height = 400,
-                            use_container_width = False, 
+                            width='content',
                             hide_index = True,
                             disabled=["termin"],    # ["termin", "Simone", "Micha", "Ute", "Birgit", "Margret", "Heidi"],
                             key="datatable", 
