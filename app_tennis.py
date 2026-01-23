@@ -129,7 +129,6 @@ def main_app():
                             hide_index = True,
                             disabled=["termin"],    # ["termin", "Simone", "Micha", "Ute", "Birgit", "Margret", "Heidi"],
                             key="datatable", 
-                            column_config=config,
                             )             # column_config=config
     
     if col2.button("Speichern"):
