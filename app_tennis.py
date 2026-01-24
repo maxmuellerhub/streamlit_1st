@@ -8,6 +8,7 @@ ftp_server = st.secrets["STOR_URL"]
 username = st.secrets["STOR_USERNAME"]
 password = st.secrets["STOR_PW"]
 directory = '/'
+app_version = "v1.1_20260123"
 
 st.set_page_config(
     page_title="Tenniskalender",
@@ -129,6 +130,7 @@ def main_app():
             st.success("Termine gespeichert")
 
     if st.session_state.username=="margret":
+        st.write("App Version: ", app_version)
         st.write(f"letztes File vom Server: {st.session_state.file_from_server}")
         st.write('gespeicherte Tabellen:')
         filenames = [f for f in os.listdir('.') if f.endswith('.csv')]
@@ -136,9 +138,6 @@ def main_app():
 
     # /end main_app()
 
-
-# "akt. Session State: ", st.session_state
-# merged from Andre_xps
 
 
 if  not st.session_state.logged_in:
